@@ -1,47 +1,47 @@
-# HPC Testbed Fresh Start Plan (Proxmox + SLURM Build, Sept 2025)
+# HPC Testbed Infra Build Artifact (Proxmox + SLURM, Sept 2025)
 
 ## Overview
-- **Project Goal:** Build a resilient HPC test lab from scratch, qualifying for Sr. HPC Systems Engineer at ______. Focus: Administer clusters, storage, networks; support apps; deploy Linux; document everything.
-- **Hypervisors:** Proxmox VE 9.x on mox01 (192.168.0.221) and mox02 (192.168.0.222) for clustering. Hardware: Intel Xeon E5-1650 v2, 64GB RAM, 1TB SSD, dual AMD Radeon HD 7970 GPUs (for CUDA/ML).
-- **Network:** 192.168.100.0/24 subnet, .internal domain. Proxmox bridges (vmbr0 for management, vmbr1 for VM traffic). Structured IPs: .2-.20 infra, .21+ compute. No legacy hacks—use bonds/VLANs for redundancy.
-- **VM Base:** Minimal Ubuntu 25.04 Server (templated in Proxmox). Admin user: "rick" (sudo, VIM/VI editor, SSH keys at UNKNOWN.
-- **Approach:** Fresh rebuild for scalability/HA. Services emphasize failover (replication/clustering). Add-ons: Logging (ELK), backups (Proxmox + rsync), security (UFW + Proxmox firewall), proxy (Nginx).
-- **Timeline:** Weeks 3-6 for infra; SLURM next. Track in GitHub issues.
+- **Project Goal:** Fresh Proxmox cluster toward SLURM testbed, building Sr. HPC Systems Engineer skills for SpaceX. Focus: Resilient infra with HA, security via LDAP/service accounts.
+- **Hypervisors:** mox01 (192.168.0.221), mox02 (192.168.0.222) on Proxmox VE 8.x, clustered.
+- **Network:** 192.168.100.0/24 subnet, .internal domain. Bridges: vmbr0 (management), vmbr1 (VM traffic).
+- **VM Base:** Minimal Ubuntu 25.04 Server template (rick user, VIM/VI, SSH keys).
+- **Build Order:** Proxmox > Base VM > DNS > DHCP > NTP > LDAP > Ansible > Grafana/Monitoring > SLURM > Extras > Compute Clients.
+- **Security:** Service accounts in LDAP for least-privilege; UFW, key auth.
+- **Repo:** https://github.com/cyberworm1/hpcConfigs.git for scripts/playbooks/docs.
+- **Timeline:** Week 3-6 for infra; SLURM workloads post-verification.
 
-## Planned Services
-- **Dual DNS + DHCP:** dns1.internal (.2), dns2.internal (.3). Bind9 with zone replication; ISC DHCP failover. Resolves .internal; dynamic/static IPs.
-- **NTP:** ntp.internal (.4). Chrony server syncing to pools; all VMs/clients point here.
-- **Ansible:** ansible.internal (.5). Control node with inventory/playbooks; SSH key auth for automation.
-- **Dual LDAP:** ldap1.internal (.6), ldap2.internal (.7). OpenLDAP with syncrepl for user/group auth failover.
-- **Monitoring:** monitor.internal (.8). Prometheus (metrics collection) + Grafana (dashboards/alerts); exporters on all nodes.
-- **SQL Databases:** db1.internal (.9) to db4.internal (.12). MariaDB with Galera clustering/replication; one for monitoring, one for SLURM accounting (slurmdbd).
-- **Extras:**
-  - Logging: log.internal (.13). ELK stack (Elasticsearch/Logstash/Kibana) for centralized audits.
-  - Backups: Proxmox-integrated + cron rsync for VMs/data.
-  - Security: UFW per VM; Nginx reverse proxy for web services; self-signed certs.
-  - Bastion: Optional jump host for secure access.
-- **SLURM Prep:** Head node + compute clients post-infra; integrate with MariaDB, GPUs.
+## Service Accounts List
+Dedicated LDAP-managed accounts/groups for security/isolation. POSIX-compliant; no sudo for services.
 
-## Considerations
-- **HA/Failover:** Replication for DNS/LDAP/SQL to mimic mission-critical redundancy (e.g., SpaceX launch ops).
-- **Security:** Minimal packages; UFW rules; key-based auth. No internet-facing services.
-- **Hardware Integration:** Test GPU passthrough for ML (PyTorch/CUDA).
-- **Documentation:** All configs/scripts in GitHub; Ansible for reprovisioning.
-- **Lessons from Legacy:** Structured IPs over ad-hoc; formal monitoring over none; containers for isolation (e.g., Docker for apps).
+| Service | Account Name | Group | Purpose/Privileges | Notes |
+|---------|--------------|-------|--------------------|-------|
+| DNS (Bind9) | dns-bind | hpc-dns | Run Bind daemon; read/write zone files. | Bind DN for replication; key auth for zone transfers. |
+| DHCP (ISC) | dhcp-server | hpc-dhcp | Manage DHCP leases; read DNS for dynamic updates. | Integrated with DNS; limited to /var/lib/dhcp. |
+| NTP (Chrony) | ntp-chrony | hpc-ntp | Sync time; access chronyd.sock. | No shell; runs as daemon user. |
+| LDAP (OpenLDAP) | ldap-admin | hpc-ldap-admins | Admin bind for schema/replication; read/write LDIF. | Separate from user auth; use for Ansible provisioning. |
+| Ansible | ansible-user | hpc-automation | SSH key auth; run playbooks across cluster. | Sudo for specific commands; inventory access. |
+| Monitoring (Prometheus) | prom-user | hpc-monitoring | Collect metrics; access exporters. | Read-only on nodes; no write to storage. |
+| Monitoring (Grafana) | grafana-user | hpc-monitoring | Dashboard access; query Prometheus. | Web auth; integrate with LDAP for user logins. |
+| SQL (MariaDB) | db-admin | hpc-db-admins | DB management; replication setup. | Per-DB users (e.g., slurm-db for SLURM). |
+| SLURM | slurm-user | hpc-slurm | Run slurmd/slurmctld; access MariaDB. | Munge auth; group for job accounting. |
+| General (All) | hpc-cluster-users | hpc-users | Base group for cluster access. | Subgroups per role; LDAP filter for logins. |
 
-## To-Do List (Ordered Steps with Goals)
+## Updated To-Do List
+Ordered steps with goals; use VIM/VI for edits, minimal VMs.
+
 | Step | Description | Goal | Est. Time | Skill Tie-In |
 |------|-------------|------|-----------|--------------|
-| 1 | Install Proxmox on hpc/hpc2; cluster nodes. | Stable hypervisor base. | 1-2 hrs | Virtualization deployment. |
-| 2 | Design IP/network schema; set up bridges. | Scalable addressing. | 30 min | Network planning. |
-| 3 | Create Ubuntu VM template (minimal, SSH keys). | Reusable base. | 45 min | VM provisioning. |
-| 4 | Deploy dual DNS/DHCP (replication/failover). | Resilient resolution. | 1 hr | Service HA. |
-| 5 | Set up NTP server. | Time sync. | 30 min | Basics. |
-| 6 | Deploy Ansible node; test playbook. | Automation ready. | 45 min | Config mgmt. |
-| 7 | Stand up dual LDAP (syncrepl). | Auth failover. | 1 hr | Directory services. |
-| 8 | Implement Prometheus + Grafana. | Cluster visibility. | 1 hr | Monitoring. |
-| 9 | Set up MariaDB (2-4 instances, clustering). | HA data persistence. | 1-2 hrs | Databases. |
-| 10 | Add logging/backups/security (ELK, rsync, UFW/Nginx). | Full resilience. | 1-2 hrs | Ops/security. |
-| 11 | Test all with Ansible; document in GitHub. | Functional testbed. | 1 hr | Testing/docs. |
+| 1 | Install Proxmox on mox01/mox02; cluster them. Set vmbr1 for 192.168.100.0/24. | Clustered hypervisors. | 1-2 hrs | Virtualization. |
+| 2 | Create base Ubuntu 25.04 minimal VM template (SSH keys, rick user, VIM). Script clone process (Bash in GitHub). | Easy deployments. | 45 min | Templating/scripting. |
+| 3 | Deploy dns01/dns02 (.2/.3); install Bind9, configure replication/failover, .internal domain. | Reliable resolution. | 1 hr | DNS HA. |
+| 4 | Deploy dhcp (.4); install ISC DHCP, integrate with DNS for dynamic/static IPs (e.g., reserves for infra). | IP management. | 45 min | DHCP setup. |
+| 5 | Deploy ntp (.5); install Chrony, sync to pools, point all VMs. | Time accuracy. | 30 min | NTP basics. |
+| 6 | Deploy ldap01/ldap02 (.6/.7); install OpenLDAP, syncrepl, add service accounts/groups. | Centralized auth. | 1 hr | LDAP failover. |
+| 7 | Deploy ansible (.8); install Ansible, inventory/playbooks, SSH keys. Test on dns/ntp. | Automation hub. | 45 min | Config mgmt. |
+| 8 | Deploy grafana (.9) + Prometheus; install on monitor VM, exporters on all, LDAP integration. | Cluster visibility. | 1 hr | Monitoring. |
+| 9 | Deploy SLURM head node (.10); install slurmctld/slurmdbd, MariaDB HA (2-4 dbs .11-.14), integrate LDAP. | Job scheduling ready. | 1-2 hrs | Resource mgmt. |
+| 10 | Add extras: ELK logging (.15), backups (Proxmox + rsync cron), security (UFW/Nginx). | Full ops resilience. | 1 hr | Security/ops. |
+| 11 | Verify infra with Ansible tests; document in GitHub (diagrams, playbooks). | Stable base. | 1 hr | Testing/docs. |
+| 12 | Spin up 2-4 compute clients (.21+); install slurmd, test workloads (e.g., simple MPI job). | Workload testing. | 1 hr | Compute nodes. |
 
 Artifact Compiled By: Grok HPC Mentor | Date: Sept 29, 2025
