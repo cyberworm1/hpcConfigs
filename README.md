@@ -1,5 +1,5 @@
 # hpcConfig home lab
-Hi there. Thanks for stopping by.  Either you've come here randomly, or you found my link via linkedin. Either way feel free to have a look around.
+Hi there. Thanks for stopping by.  Either you've come here randomly, or you found my link via linkedin. Either way feel free to have a look around. Once things are a bit more robust, I may open it up (by invite) to kick the tires and check my work.  If you're interested, you can email me at ------change when system is built and secure-----. 
 
 This project isn't really anything special, just a place for me to dump config files and master plans for my internal lab, as I work through updated infra technologies. Maybe it'll help someone else out there looking for direction or a starting point on infra engineering.  
 
