@@ -8,7 +8,7 @@
 - **Build Order:** Proxmox > Base VM > DNS > DHCP > NTP > LDAP > Ansible > Grafana/Monitoring > SLURM > Extras > Compute Clients.
 - **Security:** Service accounts in LDAP for least-privilege; UFW, key auth.
 - **Repo:** https://github.com/cyberworm1/hpcConfigs.git for scripts/playbooks/docs.
-- **Timeline:** Week 3-6 for infra; SLURM workloads post-verification.
+- **Timeline:** 2 Weekends (~20 hours) for infra; SLURM workloads post-verification.
 
 ## Service Accounts List
 Dedicated LDAP-managed accounts/groups for security/isolation. POSIX-compliant; no sudo for services.
