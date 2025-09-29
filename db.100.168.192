@@ -1,6 +1,6 @@
 $TTL 604800
 @       IN      SOA     dns01.internal. root.dns01.internal. (
-                              2025092902 ; Serial
+                              2025092904 ; Serial
                                  604800 ; Refresh
                                   86400 ; Retry
                                 2419200 ; Expire
@@ -12,14 +12,18 @@ $TTL 604800
 2       IN      PTR     dns01.internal.
 3       IN      PTR     dns02.internal.
 4       IN      PTR     dhcp.internal.
-5       IN      PTR     ntp.internal.
+5       IN      PTR     seiko.internal.
 6       IN      PTR     ldap01.internal.
 7       IN      PTR     ldap02.internal.
 8       IN      PTR     ansible.internal.
 9       IN      PTR     grafana.internal.
-10      IN      PTR     slurmhead.internal.
+10      IN      PTR     master.internal.
 11      IN      PTR     db01.internal.
 12      IN      PTR     db02.internal.
 13      IN      PTR     db03.internal.
 14      IN      PTR     db04.internal.
 15      IN      PTR     elk.internal.
+20      IN      PTR     slave000.internal.
+21      IN      PTR     slave001.internal.
+22      IN      PTR     slave002.internal.
+23      IN      PTR     slave003.internal.
