@@ -26,8 +26,8 @@ Dedicated LDAP-managed accounts/groups for security/isolation. POSIX-compliant; 
 | SLURM | slurm-user | hpc-slurm | Run slurmd/slurmctld; access MariaDB. | Munge auth; group for job accounting. |
 | General (All) | hpc-cluster-users | hpc-users | Base group for cluster access. | Subgroups per role; LDAP filter for logins. |
 
-## Updated To-Do List
-Ordered steps with goals; use VIM/VI for edits, minimal VMs.
+## To-Do List
+Ordered steps with goals; use VIM/VI for edits, minimal VMs. Step numbers will be marked with an "x" as they are completed.
 
 | Step | Description | Goal | Est. Time | Skill Tie-In |
 |------|-------------|------|-----------|--------------|
