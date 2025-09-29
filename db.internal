@@ -1,6 +1,6 @@
 $TTL 604800
 @       IN      SOA     dns01.internal. root.dns01.internal. (
-                              2025092902 ; Serial
+                              2025092904 ; Serial
                                  604800 ; Refresh
                                   86400 ; Retry
                                 2419200 ; Expire
@@ -12,16 +12,20 @@ $TTL 604800
 dns01           IN      A       192.168.100.2
 dns02           IN      A       192.168.100.3
 dhcp            IN      A       192.168.100.4
-ntp             IN      A       192.168.100.5
+seiko           IN      A       192.168.100.5
 ldap01          IN      A       192.168.100.6
 ldap02          IN      A       192.168.100.7
 ansible         IN      A       192.168.100.8
 grafana         IN      A       192.168.100.9
-slurmhead       IN      A       192.168.100.10
+master          IN      A       192.168.100.10
 db01            IN      A       192.168.100.11
 db02            IN      A       192.168.100.12
 db03            IN      A       192.168.100.13
 db04            IN      A       192.168.100.14
 elk             IN      A       192.168.100.15
+slave000        IN      A       192.168.100.20
+slave001        IN      A       192.168.100.21
+slave002        IN      A       192.168.100.22
+slave003        IN      A       192.168.100.23
 mox01           IN      A       192.168.0.221
 mox02           IN      A       192.168.0.222
