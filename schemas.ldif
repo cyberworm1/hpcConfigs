@@ -1,0 +1,6 @@
+dn: cn=schema,cn=config
+changetype: modify
+add: olcSchemaConfig
+include: file:///etc/ldap/schema/cosine.ldif
+include: file:///etc/ldap/schema/nis.ldif
+include: file:///etc/ldap/schema/inetorgperson.ldif
