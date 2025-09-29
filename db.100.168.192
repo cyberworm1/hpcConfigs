@@ -1,0 +1,28 @@
+$TTL 604800
+@       IN      SOA     dns1.internal. root.dns1.internal. (
+                              2025092901 ; Serial
+                                 604800 ; Refresh
+                                  86400 ; Retry
+                                2419200 ; Expire
+                                 604800 ) ; Negative Cache TTL
+;
+@       IN      NS      dns1.internal.
+@       IN      NS      dns2.internal.
+
+10      IN      PTR     dns1.internal.
+11      IN      PTR     dns2.internal.
+12      IN      PTR     ntp.internal.
+20      IN      PTR     ansible.internal.
+30      IN      PTR     ldap1.internal.
+31      IN      PTR     ldap2.internal.
+40      IN      PTR     prom.internal.
+41      IN      PTR     grafana.internal.
+50      IN      PTR     db1.internal.
+51      IN      PTR     db2.internal.
+52      IN      PTR     db3.internal.
+53      IN      PTR     db4.internal.
+100     IN      PTR     slurmctld.internal.
+101     IN      PTR     slurmdbd.internal.
+150     IN      PTR     login.internal.
+200     IN      PTR     compute01.internal.
+201     IN      PTR     compute02.internal.
