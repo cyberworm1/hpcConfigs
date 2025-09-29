@@ -2,7 +2,7 @@
 
 ## Overview
 - **Project Goal:** Fresh Proxmox cluster toward SLURM testbed, building Sr. HPC Systems Engineer skills for SpaceX. Focus: Resilient infra with HA, security via LDAP/service accounts.
-- **Hypervisors:** mox01 (192.168.0.221), mox02 (192.168.0.222) on Proxmox VE 8.x, clustered.
+- **Hypervisors:** mox01 (192.168.0.221), mox02 (192.168.0.222) on Proxmox VE 9.x, clustered.
 - **Network:** 192.168.100.0/24 subnet, .internal domain. Bridges: vmbr0 (management), vmbr1 (VM traffic).
 - **VM Base:** Minimal Ubuntu 25.04 Server template (rick user, VIM/VI, SSH keys).
 - **Build Order:** Proxmox > Base VM > DNS > DHCP > NTP > LDAP > Ansible > Grafana/Monitoring > SLURM > Extras > Compute Clients.
