@@ -1,0 +1,10 @@
+dn: cn=config
+changetype: modify
+add: olcServerID
+olcServerID: 1 ldap://ldap01.internal:389
+
+dn: olcOverlay=syncprov,olcDatabase={1}mdb,cn=config
+changetype: add
+objectClass: olcOverlayConfig
+objectClass: olcSyncProvConfig
+olcOverlay: syncprov
