@@ -1,30 +1,27 @@
 $TTL 604800
-@       IN      SOA     dns1.internal. root.dns1.internal. (
-                              2025092901 ; Serial
+@       IN      SOA     dns01.internal. root.dns01.internal. (
+                              2025092902 ; Serial
                                  604800 ; Refresh
                                   86400 ; Retry
                                 2419200 ; Expire
                                  604800 ) ; Negative Cache TTL
 ;
-@       IN      NS      dns1.internal.
-@       IN      NS      dns2.internal.
+@       IN      NS      dns01.internal.
+@       IN      NS      dns02.internal.
 
-dns1            IN      A       192.168.100.10
-dns2            IN      A       192.168.100.11
-ntp             IN      CNAME   dns1.internal.
-ansible         IN      A       192.168.100.20
-ldap1           IN      A       192.168.100.30
-ldap2           IN      A       192.168.100.31
-prom            IN      A       192.168.100.40
-grafana         IN      A       192.168.100.41
-db1             IN      A       192.168.100.50
-db2             IN      A       192.168.100.51
-db3             IN      A       192.168.100.52
-db4             IN      A       192.168.100.53
-slurmctld       IN      A       192.168.100.100
-slurmdbd        IN      A       192.168.100.101
-login           IN      A       192.168.100.150
-compute01       IN      A       192.168.100.200
-compute02       IN      A       192.168.100.201
+dns01           IN      A       192.168.100.2
+dns02           IN      A       192.168.100.3
+dhcp            IN      A       192.168.100.4
+ntp             IN      A       192.168.100.5
+ldap01          IN      A       192.168.100.6
+ldap02          IN      A       192.168.100.7
+ansible         IN      A       192.168.100.8
+grafana         IN      A       192.168.100.9
+slurmhead       IN      A       192.168.100.10
+db01            IN      A       192.168.100.11
+db02            IN      A       192.168.100.12
+db03            IN      A       192.168.100.13
+db04            IN      A       192.168.100.14
+elk             IN      A       192.168.100.15
 mox01           IN      A       192.168.0.221
 mox02           IN      A       192.168.0.222
