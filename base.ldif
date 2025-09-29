@@ -1,0 +1,12 @@
+dn: dc=internal
+objectClass: dcObject
+objectClass: organization
+dc: internal
+o: HPC Testbed
+
+dn: cn=admin,dc=internal
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword: {SSHA}your-strong-hashed-pw  # Generate with slappasswd later
