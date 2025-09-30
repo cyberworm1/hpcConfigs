@@ -31,7 +31,7 @@ Ordered steps with goals; use VIM/VI for edits, minimal VMs. Step numbers will b
 
 | Step | Description | Goal | Est. Time | Skill Tie-In |
 |------|-------------|------|-----------|--------------|
-| 1 | Install Proxmox on mox01/mox02; cluster them. Set vmbr1 for 192.168.100.0/24. | Clustered hypervisors. | 1-2 hrs | Virtualization. |
+| X | Install Proxmox on mox01/mox02; cluster them. Set vmbr1 for 192.168.100.0/24. | Clustered hypervisors. | 1-2 hrs | Virtualization. |
 | 2 | Create base Ubuntu 25.04 minimal VM template (SSH keys, rick user, VIM). Script clone process (Bash in GitHub). | Easy deployments. | 45 min | Templating/scripting. |
 | 3 | Deploy dns01/dns02 (.2/.3); install Bind9, configure replication/failover, .internal domain. | Reliable resolution. | 1 hr | DNS HA. |
 | 4 | Deploy dhcp (.4); install ISC DHCP, integrate with DNS for dynamic/static IPs (e.g., reserves for infra). | IP management. | 45 min | DHCP setup. |
