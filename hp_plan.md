@@ -35,7 +35,7 @@ Ordered steps with goals; use VIM/VI for edits, minimal VMs. Step numbers will b
 | 2 | Create base Ubuntu 25.04 minimal VM template (SSH keys, rick user, VIM). Script clone process (Bash in GitHub). | Easy deployments. | 45 min | Templating/scripting. |
 | x | Deploy dns01/dns02 (.2/.3); install Bind9, configure replication/failover, .internal domain. | Reliable resolution. | 1 hr | DNS HA. |
 | x | Deploy dhcp (.4); install ISC DHCP, integrate with DNS for dynamic/static IPs (e.g., reserves for infra). | IP management. | 45 min | DHCP setup. |
-| 5 | Deploy ntp (.5); install Chrony, sync to pools, point all VMs. | Time accuracy. | 30 min | NTP basics. |
+| x | Deploy ntp (.5); install Chrony, sync to pools, point all VMs. | Time accuracy. | 30 min | NTP basics. |
 | 6 | Deploy ldap01/ldap02 (.6/.7); install OpenLDAP, syncrepl, add service accounts/groups. | Centralized auth. | 1 hr | LDAP failover. |
 | 7 | Deploy ansible (.8); install Ansible, inventory/playbooks, SSH keys. Test on dns/ntp. | Automation hub. | 45 min | Config mgmt. |
 | 8 | Deploy grafana (.9) + Prometheus; install on monitor VM, exporters on all, LDAP integration. | Cluster visibility. | 1 hr | Monitoring. |
