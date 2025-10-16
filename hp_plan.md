@@ -27,7 +27,7 @@ Dedicated LDAP-managed accounts/groups for security/isolation. POSIX-compliant; 
 | General (All) | hpc-cluster-users | hpc-users | Base group for cluster access. | Subgroups per role; LDAP filter for logins. |
 
 ## To-Do List
-Ordered steps with goals; use VIM/VI for edits, minimal VMs. Step numbers will be marked with an "x" as they are completed.
+Ordered steps with goals; use VIM/VI for edits, minimal VMs. Step numbers will be marked with an "x" as they are completed. Step numbers marked "/" are semi-functional and/or need review+troubleshooting.
 
 | Step | Description | Goal | Est. Time | Skill Tie-In |
 |------|-------------|------|-----------|--------------|
