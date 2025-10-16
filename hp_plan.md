@@ -39,6 +39,7 @@ Ordered steps with goals; use VIM/VI for edits, minimal VMs. Step numbers will b
 | x | Created a 'mediawiki' server at .16 to use for internal documentation and reference | Documentation | 1 hr | Wiki Setup. | 
 | / | PARTIALLY COMPLETE Deploy ldap01/ldap02 (.6/.7); CHANGED PLAN FROM OpenLDAP to FreeIPA server on rocky linux VM. FreeIPA is running and semi-functional on .6 needs replication/failover | Centralized auth. | 1 hr | LDAP failover. |
 | 6.5| Check into SRV and TXT records for DNS. Work out simplification of auth binding to FreeIPA. 
+| 6.8| Create service users/groups in freeIPA. Decide best practice for key infra hosts... "Should they bind to auth or have seperate service accounts for Ansible+Monitoring+Logging" 
 | 7 | Deploy ansible (.8); install Ansible, inventory/playbooks, SSH keys. Test on dns/ntp. | Automation hub. | 45 min | Config mgmt. |
 | 8 | Deploy grafana (.9) + Prometheus; install on monitor VM, exporters on all, LDAP integration. | Cluster visibility. | 1 hr | Monitoring. |
 | 9 | Deploy SLURM head node (.10); install slurmctld/slurmdbd, MariaDB HA (2-4 dbs .11-.14), integrate LDAP. | Job scheduling ready. | 1-2 hrs | Resource mgmt. |
