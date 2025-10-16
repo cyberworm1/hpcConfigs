@@ -13,8 +13,8 @@ dns01           IN      A       192.168.100.2
 dns02           IN      A       192.168.100.3
 dhcp            IN      A       192.168.100.4
 seiko           IN      A       192.168.100.5
-ldap01          IN      A       192.168.100.6
-ldap02          IN      A       192.168.100.7
+ldap01.hpc          IN      A       192.168.100.6
+ldap02.hpc          IN      A       192.168.100.7
 ansible         IN      A       192.168.100.8
 grafana         IN      A       192.168.100.9
 master          IN      A       192.168.100.10
