@@ -37,6 +37,8 @@ Ordered steps with goals; use VIM/VI for edits, minimal VMs. Step numbers will b
 | x | Deploy dhcp (.4); install ISC DHCP, integrate with DNS for dynamic/static IPs (e.g., reserves for infra). | IP management. | 45 min | DHCP setup. |
 | x | Deploy ntp (.5); install Chrony, sync to pools, point all VMs. | Time accuracy. | 30 min | NTP basics. |
 | x | Created a 'mediawiki' server at .16 to use for internal documentation and reference | Documentation | 1 hr | Wiki Setup. | 
+| 6 | Implement and configure a JIRA server | Documentation and Issue Tracking| time unknown | Issue Tracking|
+| 6.1| Implement an internal git server and repo | Internal code repository | time unknown | Automation Aid and Code Repo |
 | / | PARTIALLY COMPLETE Deploy ldap01/ldap02 (.6/.7); CHANGED PLAN FROM OpenLDAP to FreeIPA server on rocky linux VM. FreeIPA is running and semi-functional on .6 needs replication/failover | Centralized auth. | 1 hr | LDAP failover. |
 | 6.5| Check into SRV and TXT records for DNS. Work out simplification of auth binding to FreeIPA. 
 | 6.8| Create service users/groups in freeIPA. Decide best practice for key infra hosts... "Should they bind to auth or have seperate service accounts for Ansible+Monitoring+Logging" 
